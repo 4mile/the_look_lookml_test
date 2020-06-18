@@ -3,6 +3,7 @@ view: inventory_items {
     ;;
   drill_fields: [id]
 
+  # ----- Pre-Defined Dimensions ------
   dimension: id {
     primary_key: yes
     type: number
@@ -101,12 +102,5 @@ view: inventory_items {
 
 # }
 # ----- Candidate Created Measures - END  ------
-
-  ## inventory_items measure
-  measure: total_cost {
-    type: sum
-    sql: ${cost} ;;
-    value_format_name: usd
-  }
 
 }
