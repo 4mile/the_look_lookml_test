@@ -3,6 +3,8 @@ view: users {
     ;;
   drill_fields: [id]
 
+# ----- Pre-Defined Dimensions ------
+
   dimension: id {
     primary_key: yes
     type: number
@@ -84,8 +86,22 @@ view: users {
     sql: ${TABLE}."ZIP" ;;
   }
 
+# ----- Candidate Created Dimensions - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Dimensions - END  ------
+
+# ----- Pre-Defined Measures ------
   measure: count {
     type: count
     drill_fields: [id, first_name, last_name, events.count, order_items.count]
   }
+
+# ----- Candidate Created Measures - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Measures - END  ------
+
 }

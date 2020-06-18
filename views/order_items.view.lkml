@@ -1,7 +1,7 @@
 view: order_items {
   sql_table_name: "PUBLIC"."ORDER_ITEMS"
     ;;
-  drill_fields: [id]
+  # ----- Pre-Defined Dimensions ------
 
   dimension: id {
     primary_key: yes
@@ -92,10 +92,23 @@ view: order_items {
     sql: ${TABLE}."USER_ID" ;;
   }
 
+# ----- Candidate Created Dimensions - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Dimensions - END  ------
+
+# ----- Pre-Defined Measures ------
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
+# ----- Candidate Created Measures - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Measures - END  ------
 
   # ----- Sets of fields for drilling ------
   set: detail {

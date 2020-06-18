@@ -83,8 +83,30 @@ view: inventory_items {
     sql: ${TABLE}."SOLD_AT" ;;
   }
 
+  # ----- Candidate Created Dimensions - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Dimensions - END  ------
+
+# ----- Pre-Defined Measures ------
+
   measure: count {
     type: count
     drill_fields: [id, product_name, products.id, products.name, order_items.count]
   }
+
+  # ----- Candidate Created Measures - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Measures - END  ------
+
+  ## inventory_items measure
+  measure: total_cost {
+    type: sum
+    sql: ${cost} ;;
+    value_format_name: usd
+  }
+
 }

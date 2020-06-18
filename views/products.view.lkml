@@ -3,6 +3,7 @@ view: products {
     ;;
   drill_fields: [id]
 
+ # ----- Pre-Defined Dimensions ------
   dimension: id {
     primary_key: yes
     type: number
@@ -50,8 +51,24 @@ view: products {
     sql: ${TABLE}."SKU" ;;
   }
 
+# ----- Candidate Created Dimensions - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Dimensions - END  ------
+
+# ----- Pre-Defined Measures ------
   measure: count {
     type: count
     drill_fields: [id, name, distribution_centers.name, distribution_centers.id, inventory_items.count]
   }
+
+# ----- Candidate Created Measures - BEGIN ------
+#{
+
+# }
+# ----- Candidate Created Measures - END  ------
+
+
+
 }
