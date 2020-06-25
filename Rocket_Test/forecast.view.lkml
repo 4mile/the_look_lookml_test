@@ -9,6 +9,19 @@ view: forecast {
         , '1579' as price_increase
         , '237' as upsell
         , '482' as cross_sell
+
+        union all
+
+        select 'Q1' as quarter
+        , '4234' as up_for_renewal_arr
+        ,  '0' as cancellations
+        , '-406' as contractions
+        , '-4' as price_decrease
+        , '3825' as renewal_arr
+        , '40' as price_increase
+        , '246' as upsell
+        , '251' as cross_sell
+
        ;;
     }
 
