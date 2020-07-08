@@ -22,6 +22,18 @@ view: forecast {
         , '246' as upsell
         , '251' as cross_sell
 
+        union all
+
+        select 'Q3' as quarter
+        , '20943' as up_for_renewal_arr
+        ,  '-630' as cancellations
+        , '-342' as contractions
+        , '-247' as price_decrease
+        , '19724' as renewal_arr
+        , '1515' as price_increase
+        , '246' as upsell
+        , '199' as cross_sell
+
        ;;
     }
 
