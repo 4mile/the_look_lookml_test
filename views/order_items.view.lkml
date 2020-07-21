@@ -95,6 +95,8 @@ view: order_items {
 # ----- Candidate Created Dimensions - BEGIN ------
 #{
 
+
+
 # }
 # ----- Candidate Created Dimensions - END  ------
 
@@ -106,6 +108,8 @@ view: order_items {
 
 # ----- Candidate Created Measures - BEGIN ------
 #{
+
+
 
 # }
 # ----- Candidate Created Measures - END  ------
