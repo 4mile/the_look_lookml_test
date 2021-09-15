@@ -19,13 +19,6 @@ view: distribution_centers {
     sql: ${TABLE}."LONGITUDE" ;;
   }
 
-  dimension: distribution_center_location {
-    description: "Lat/Long location of the Distribution Center"
-    type: location
-    sql_latitude: ${latitude} ;;
-    sql_longitude: ${longitude} ;;
-  }
-
   dimension: name {
     type: string
     sql: ${TABLE}."NAME" ;;

@@ -23,13 +23,4 @@ explore: order_items {
     relationship: many_to_one
     sql_on: ${inventory_items.product_id} = ${products.id} ;;
   }
-
-  join: distribution_centers {
-    relationship: many_to_one
-    sql_on: ${inventory_items.product_distribution_center_id} = ${distribution_centers.id} ;;
-  }
-}
-
-explore: users {
-  label: "Customers"
 }
