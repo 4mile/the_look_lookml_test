@@ -267,43 +267,12 @@ view: order_items {
     sql: ${TABLE}.sale_price ;;
   }
 
-  dimension: gross_margin {
-    label: "Gross Margin"
-    type: number
-    value_format_name: usd
-    sql: ${sale_price} - ${inventory_items.cost};;
-  }
-
-  dimension: item_gross_margin_percentage {
-    label: "Item Gross Margin Percentage"
-    type: number
-    value_format_name: percent_2
-    sql: 1.0 * ${gross_margin}/NULLIF(${sale_price},0) ;;
-  }
-
-  dimension: item_gross_margin_percentage_tier {
-    label: "Item Gross Margin Percentage Tier"
-    type: tier
-    sql: 100*${item_gross_margin_percentage} ;;
-    tiers: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90]
-    style: interval
-  }
-
   measure: total_sale_price {
     label: "Total Sale Price"
     type: sum
     value_format_name: usd
     sql: ${sale_price} ;;
     drill_fields: [detail*]
-  }
-
-  measure: total_gross_margin {
-    label: "Total Gross Margin"
-    type: sum
-    value_format_name: usd
-    sql: ${gross_margin} ;;
-    # drill_fields: [detail*]
-    drill_fields: [user_id, average_sale_price, total_gross_margin]
   }
 
   measure: average_sale_price {
@@ -332,28 +301,6 @@ view: order_items {
     type: max
     value_format_name: usd
     sql: ${sale_price} ;;
-  }
-
-  measure: average_gross_margin {
-    label: "Average Gross Margin"
-    type: average
-    value_format_name: usd
-    sql: ${gross_margin} ;;
-    drill_fields: [detail*]
-  }
-
-  measure: total_gross_margin_percentage {
-    label: "Total Gross Margin Percentage"
-    type: number
-    value_format_name: percent_2
-    sql: 1.0 * ${total_gross_margin}/ nullif(${total_sale_price},0) ;;
-  }
-
-  measure: conversion_rate_drop {
-    description: "Bogus Measure for L'Oreal, ignore. Sorry David"
-    type: number
-    sql: ${total_gross_margin_percentage}*-1 ;;
-    value_format_name: percent_2
   }
 
   measure: average_spend_per_user {

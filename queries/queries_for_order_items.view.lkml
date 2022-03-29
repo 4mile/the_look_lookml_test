@@ -1,20 +1,6 @@
 include: "/views/**/*.view" # include all the views
 
 # Place in `thelook` model
-explore: +order_items {
-  query: high_value_geos {
-    description: "States delivering high gross margins over the past 90 days"
-    dimensions: [users.state]
-    measures: [total_gross_margin]
-    sorts: [total_gross_margin: desc]
-    filters: [
-      inventory_items.created_date: "90 days",
-      order_items.total_gross_margin: ">=10000",
-      users.country: "USA"
-    ]
-  }
-}
-
 
 explore: +order_items {
   query: year_over_year {

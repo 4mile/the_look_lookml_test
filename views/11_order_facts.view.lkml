@@ -10,7 +10,6 @@ view: order_facts {
       column: order_cost { field: inventory_items.total_cost }
       column: user_id {field: order_items.user_id }
       column: created_at {field: order_items.created_raw}
-      column: order_gross_margin {field: order_items.total_gross_margin}
       derived_column: order_sequence_number {
         sql: RANK() OVER (PARTITION BY user_id ORDER BY created_at) ;;
       }
@@ -44,12 +43,6 @@ view: order_facts {
     type: number
     value_format_name: usd
     sql: ${TABLE}.order_cost ;;
-  }
-
-  dimension: order_gross_margin {
-    label: "Order Gross Margin"
-    type: number
-    value_format_name: usd
   }
 
   dimension: order_sequence_number {
