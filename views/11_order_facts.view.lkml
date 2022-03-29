@@ -1,4 +1,4 @@
-include: "/models/the_look_bq.model"
+include: "/models/the_look_lookml_test_bq.model"
 
 view: order_facts {
   view_label: "Order Facts"
