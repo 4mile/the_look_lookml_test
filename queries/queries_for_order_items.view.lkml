@@ -39,17 +39,3 @@ explore: +order_items {
     #timezone: "America/Los_Angeles"
   }
 }
-
-# Place in `thelook` model
-explore: +order_items {
-  query: severely_delayed_orders {
-    description: "Orders that are still in Processing after 3 days, filtered by Distribution Center"
-    dimensions: [created_date, order_id, products.item_name, status, users.email]
-    measures: [average_days_to_process]
-    filters: [
-      distribution_centers.name: "Chicago IL",
-      order_items.created_date: "before 3 days ago",
-      order_items.status: "Processing"
-    ]
-  }
-}

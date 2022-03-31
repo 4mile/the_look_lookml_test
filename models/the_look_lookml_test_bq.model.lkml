@@ -39,13 +39,6 @@ explore: order_items {
     sql_on: ${order_items.user_id} = ${users.id} ;;
   }
 
-  join: user_order_facts {
-    view_label: "Users Facts"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${user_order_facts.user_id} = ${order_items.user_id} ;;
-  }
-
   join: products {
     view_label: "Products"
     type: left_outer
@@ -130,13 +123,6 @@ explore: events {
     sql_on: ${sessions.session_user_id} = ${users.id} ;;
     relationship: many_to_one
   }
-
-  join: user_order_facts {
-    type: left_outer
-    sql_on: ${users.id} = ${user_order_facts.user_id} ;;
-    relationship: one_to_one
-    view_label: "Users"
-  }
 }
 
 explore: sessions {
@@ -180,13 +166,6 @@ explore: sessions {
     type: left_outer
     relationship: many_to_one
     sql_on: ${users.id} = ${sessions.session_user_id} ;;
-  }
-
-  join: user_order_facts {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${user_order_facts.user_id} = ${users.id} ;;
-    view_label: "Users"
   }
 }
 

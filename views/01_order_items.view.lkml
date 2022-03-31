@@ -71,88 +71,6 @@ view: order_items {
     label: "Order ID"
     type: number
     sql: ${TABLE}.order_id ;;
-    action: {
-      label: "Send this to slack channel"
-      url: "https://hooks.zapier.com/hooks/catch/1662138/tvc3zj/"
-      param: {
-        name: "user_dash_link"
-        value: "/dashboards/ayalascustomerlookupdb?Email={{ users.email._value}}"
-      }
-      form_param: {
-        name: "Message"
-        type: textarea
-        default: "Hey,
-        Could you check out order #{{value}}. It's saying its {{status._value}},
-        but the customer is reaching out to us about it.
-        ~{{ _user_attributes.first_name}}"
-      }
-      form_param: {
-        name: "Recipient"
-        type: select
-        default: "zevl"
-        option: {
-          name: "zevl"
-          label: "Zev"
-        }
-        option: {
-          name: "slackdemo"
-          label: "Slack Demo User"
-        }
-      }
-      form_param: {
-        name: "Channel"
-        type: select
-        default: "cs"
-        option: {
-          name: "cs"
-          label: "Customer Support"
-        }
-        option: {
-          name: "general"
-          label: "General"
-        }
-      }
-    }
-    action: {
-      label: "Create Order Form"
-      url: "https://hooks.zapier.com/hooks/catch/2813548/oosxkej/"
-      form_param: {
-        name: "Order ID"
-        type: string
-        default: "{{ order_id._value }}"
-      }
-
-      form_param: {
-        name: "Name"
-        type: string
-        default: "{{ users.name._value }}"
-      }
-
-      form_param: {
-        name: "Email"
-        type: string
-        default: "{{ _user_attributes.email }}"
-      }
-
-      form_param: {
-        name: "Item"
-        type: string
-        default: "{{ products.item_name._value }}"
-      }
-
-      form_param: {
-        name: "Price"
-        type: string
-        default: "{{ order_items.sale_price._rendered_value }}"
-      }
-
-      form_param: {
-        name: "Comments"
-        type: string
-        default: " Hi {{ users.first_name._value }}, thanks for your business!"
-      }
-    }
-    value_format: "00000"
   }
 
 ########## Time Dimensions ##########
@@ -236,26 +154,6 @@ view: order_items {
         WHEN ${status} = 'Cancelled' THEN NULL
       END
        ;;
-  }
-
-  dimension: shipping_time {
-    label: "Shipping Time"
-    type: number
-    sql: TIMESTAMP_DIFF(${delivered_raw}, ${shipped_raw}, DAY)*1.0 ;;
-  }
-
-  measure: average_days_to_process {
-    label: "Average Days to Process"
-    type: average
-    value_format_name: decimal_2
-    sql: ${days_to_process} ;;
-  }
-
-  measure: average_shipping_time {
-    label: "Average Shipping Time"
-    type: average
-    value_format_name: decimal_2
-    sql: ${shipping_time} ;;
   }
 
 ########## Financial Information ##########
@@ -392,60 +290,6 @@ view: order_items {
     drill_fields: [products.brand, order_count, count_with_repeat_purchase_within_30d]
   }
 
-########## Dynamic Sales Cohort App ##########
-
-#   filter: cohort_by {
-#     type: string
-#     hidden: yes
-#     suggestions: ["Week", "Month", "Quarter", "Year"]
-#   }
-#
-#   filter: metric {
-#     type: string
-#     hidden: yes
-#     suggestions: ["Order Count", "Gross Margin", "Total Sales", "Unique Users"]
-#   }
-#
-#   dimension_group: first_order_period {
-#     type: time
-#     timeframes: [date]
-#     hidden: yes
-#     sql: CAST(DATE_TRUNC({% parameter cohort_by %}, ${user_order_facts.first_order_date}) AS TIMESTAMP)
-#       ;;
-#   }
-#
-#   dimension: periods_as_customer {
-#     type: number
-#     hidden: yes
-#     sql: TIMESTAMP_DIFF(${user_order_facts.first_order_date}, ${user_order_facts.latest_order_date}, {% parameter cohort_by %})
-#       ;;
-#   }
-#
-#   measure: cohort_values_0 {
-#     type: count_distinct
-#     hidden: yes
-#     sql: CASE WHEN {% parameter metric %} = 'Order Count' THEN ${id}
-#         WHEN {% parameter metric %} = 'Unique Users' THEN ${users.id}
-#         ELSE null
-#       END
-#        ;;
-#   }
-#
-#   measure: cohort_values_1 {
-#     type: sum
-#     hidden: yes
-#     sql: CASE WHEN {% parameter metric %} = 'Gross Margin' THEN ${gross_margin}
-#         WHEN {% parameter metric %} = 'Total Sales' THEN ${sale_price}
-#         ELSE 0
-#       END
-#        ;;
-#   }
-#
-#   measure: values {
-#     type: number
-#     hidden: yes
-#     sql: ${cohort_values_0} + ${cohort_values_1} ;;
-#   }
 
 ########## Sets ##########
 
