@@ -17,11 +17,6 @@ explore: data_tool {
     sql_on: ${sessions.session_user_id} = ${users.id} ;;
     relationship: many_to_one
   }
-  join: user_order_facts {
-    sql_on: ${users.id} = ${user_order_facts.user_id} ;;
-    relationship: one_to_one
-    view_label: "Users"
-  }
 }
 
 
