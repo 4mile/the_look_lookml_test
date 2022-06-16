@@ -17,20 +17,6 @@ explore: +order_items {
 }
 
 explore: +order_items {
-  query: shipments_status {
-    description: "Summarises the status of the shipping pipeline"
-    dimensions: [created_date, status]
-    pivots: [status]
-    measures: [order_count]
-    filters: [
-      distribution_centers.name: "Chicago IL",
-      order_items.created_date: "60 days",
-      order_items.status: "Complete,Shipped,Processing"
-    ]
-  }
-}
-
-explore: +order_items {
   query: inventory_aging {
     description: "Volume of inventory by age of stock item"
     dimensions: [inventory_items.days_in_inventory_tier]
