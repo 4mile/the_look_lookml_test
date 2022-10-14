@@ -8,7 +8,7 @@ view: users {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
-    tags: ["user_id"]
+    tags: ["user_id", "sfdc_contact_id"]
   }
 
   dimension: first_name {
