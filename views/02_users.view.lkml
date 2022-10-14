@@ -68,7 +68,7 @@ view: users {
   dimension: email {
     label: "Email"
     sql: ${TABLE}.email ;;
-    tags: ["email"]
+    tags: ["sfdc_lead_id", "email"]
 
     link: {
       label: "User Lookup Dashboard"
