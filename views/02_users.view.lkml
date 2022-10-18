@@ -13,15 +13,13 @@ view: users {
 
   dimension: contact_id {
     label: "Contact ID"
-    type: number
-    sql: ${TABLE}.id ;;
+    sql: CONCAT("contactId", ${TABLE}.id) ;;
     tags: ["sfdc_contact_id"]
   }
 
   dimension: lead_id {
     label: "Lead ID"
-    type: number
-    sql: ${TABLE}.id ;;
+    sql: CONCAT("leadId", ${TABLE}.id) ;;
     tags: ["sfdc_lead_id"]
   }
 
