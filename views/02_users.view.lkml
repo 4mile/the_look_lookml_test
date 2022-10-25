@@ -19,7 +19,8 @@ view: users {
 
   dimension: lead_id {
     label: "Lead ID"
-    sql: CONCAT("leadId", ${TABLE}.id) ;;
+    type: number
+    sql: ${TABLE}.id ;;
     tags: ["sfdc_lead_id"]
   }
 
