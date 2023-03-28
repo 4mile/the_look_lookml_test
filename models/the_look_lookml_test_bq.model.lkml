@@ -80,20 +80,20 @@ explore: order_items {
   # }
 
 
-  join: one_year {
+  join: prior_month {
     from: rolling_average_view
     view_label: "Prior Year"
     relationship: many_to_one
     type: left_outer
-    sql_on: ${order_items.created_month} = ${one_year.last_year} ;;
+    sql_on: ${order_items.created_month} = ${prior_month.prior_month} ;;
   }
 
-  join: two_years {
+  join: prior_two_months {
     from: rolling_average_view
     view_label: "Two Years Ago"
     relationship: many_to_one
     type: left_outer
-    sql_on: ${order_items.created_month} ${two_years.two_years_ago} ;;
+    sql_on: ${order_items.created_month} ${prior_two_months.prior_two_months} ;;
   }
 
 }

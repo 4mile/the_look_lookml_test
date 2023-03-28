@@ -149,7 +149,7 @@ measure: total_revenue {
   measure: moving_average {
     type: number
     value_format_name: decimal_0
-    sql:(${order_items.total_revenue} + ifnull(${one_year.total_revenue},0) + ifnull(${two_years.total_revenue},0))/3  ;;
+    sql:(${order_items.total_revenue} + ifnull(${prior_month.total_revenue},0) + ifnull(${prior_two_months.total_revenue},0))/3  ;;
   }
 
 ########## Sets ##########
