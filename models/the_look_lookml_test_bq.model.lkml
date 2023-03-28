@@ -90,7 +90,7 @@ explore: order_items {
 
   join: prior_two_months {
     from: rolling_average_view
-    view_label: "Two Months Ago"
+    view_label: "Prior Two Months"
     relationship: many_to_one
     type: left_outer
     sql_on: ${order_items.created_month} ${prior_two_months.prior_two_months} ;;
