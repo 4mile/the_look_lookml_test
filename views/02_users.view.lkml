@@ -125,6 +125,11 @@ view: users {
     drill_fields: [zip, city]
   }
 
+  dimension: city_state {
+    type: string
+    sql: ${city}||', '||${state} ;;
+  }
+
   dimension: zip {
     label: "Zip"
     type: zipcode
