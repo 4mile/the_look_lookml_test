@@ -3,6 +3,7 @@ label: "The Look LookML Test (BQ)"
 include: "/queries/queries*.view" # includes all queries refinements
 include: "/views/**/*.view" # include all the views
 include: "/dashboards/*.dashboard.lookml" # include all the views
+include: "/rolling_average_view.view"
 
 ############ Model Configuration #############
 
@@ -77,6 +78,24 @@ explore: order_items {
   #     datagroup_trigger: ecommerce_etl
   #   }
   # }
+
+
+  join: one_year {
+    from: rolling_average_view
+    view_label: "Prior Year"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${one_year.last_year} = ${order_items.created_month} ;;
+  }
+
+  join: two_years {
+    from: rolling_average_view
+    view_label: "Two Years Ago"
+    relationship: many_to_one
+    type: left_outer
+    sql_on: ${two_years.two_years_ago} = ${order_items.created_month} ;;
+  }
+
 }
 
 #########  Event Data Explores #########
@@ -292,42 +311,42 @@ explore: kmeans_model5 {
   label: "KMeans Model"
 }
 
-explore: ecomm_predict {
-  label: "(8) Cohort Analysis"
-  fields: [ALL_FIELDS*,-centroid_id, -user_id]
-  join: users {
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${ecomm_predict.user_id} = ${users.id} ;;
-  }
-  join: order_items {
-    view_label: "Order Items"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${users.id} = ${order_items.user_id} ;;
-  }
-  join: inventory_items {
-    view_label: "Inventory Items"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
-  }
-  join: products {
-    view_label: "Products"
-    type: left_outer
-    relationship: many_to_one
-    sql_on: ${products.id} = ${inventory_items.product_id}  ;;
-  }
-  join: repeat_purchase_facts {
-    view_label: "Repeat Purchase Facts"
-    relationship: many_to_one
-    type: full_outer
-    sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
-  }
-  join: order_facts {
-    type: left_outer
-    view_label: "Orders"
-    relationship: many_to_one
-    sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
-  }
-}
+# explore: ecomm_predict {
+#   label: "(8) Cohort Analysis"
+#   fields: [ALL_FIELDS*,-centroid_id, -user_id]
+#   join: users {
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${ecomm_predict.user_id} = ${users.id} ;;
+#   }
+#   join: order_items {
+#     view_label: "Order Items"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${users.id} = ${order_items.user_id} ;;
+#   }
+#   join: inventory_items {
+#     view_label: "Inventory Items"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${inventory_items.id} = ${order_items.inventory_item_id} ;;
+#   }
+#   join: products {
+#     view_label: "Products"
+#     type: left_outer
+#     relationship: many_to_one
+#     sql_on: ${products.id} = ${inventory_items.product_id}  ;;
+#   }
+#   join: repeat_purchase_facts {
+#     view_label: "Repeat Purchase Facts"
+#     relationship: many_to_one
+#     type: full_outer
+#     sql_on: ${order_items.order_id} = ${repeat_purchase_facts.order_id} ;;
+#   }
+#   join: order_facts {
+#     type: left_outer
+#     view_label: "Orders"
+#     relationship: many_to_one
+#     sql_on: ${order_facts.order_id} = ${order_items.order_id} ;;
+#   }
+# }
