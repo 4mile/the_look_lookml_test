@@ -11,6 +11,19 @@ view: users {
     tags: ["user_id"]
   }
 
+  dimension: contact_id {
+    label: "Contact ID"
+    sql: CONCAT("contactId", ${TABLE}.id) ;;
+    tags: ["sfdc_contact_id"]
+  }
+
+  dimension: lead_id {
+    label: "Lead ID"
+    type: number
+    sql: ${TABLE}.id ;;
+    tags: ["sfdc_lead_id"]
+  }
+
   dimension: first_name {
     label: "First Name"
     hidden: yes
@@ -68,7 +81,7 @@ view: users {
   dimension: email {
     label: "Email"
     sql: ${TABLE}.email ;;
-    tags: ["email"]
+    tags: ["sfdc_lead_id", "email"]
 
     link: {
       label: "User Lookup Dashboard"
