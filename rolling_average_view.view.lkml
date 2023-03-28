@@ -2,7 +2,7 @@ view: rolling_average_view {
   derived_table: {
     sql:
     select
-      cast((format_timestamp('%Y-%m', created_at )) as string) as month_year,
+      cast(format_timestamp('%Y-%m', created_at ) as string) as month_year,
       cast(format_timestamp('%Y-%m', date_add(cast(created_at as date), INTERVAL 1 MONTH )) as string) as prior_month,
       cast(format_timestamp('%Y-%m', date_add(cast(created_at as date), INTERVAL 2 MONTH )) as string) as prior_two_months,
       count(order_id) as total_revenue
@@ -17,11 +17,11 @@ view: rolling_average_view {
 
   measure: month_over_month {
     type: number
-    sql:  ${order_items.count} - ifnull(${prior_month.total_revenue},0)  ;;
+    sql:  ${order_items.total_revenue} - ifnull(${prior_month.total_revenue},0)  ;;
   }
   measure: month_over_month_percent {
     type: number
     value_format_name: percent_1
-    sql: ${order_items.count}/nullif(${prior_month.total_revenue},0) - 1 ;;
+    sql: ${order_items.total_revenue}/nullif(${prior_month.total_revenue},0) - 1 ;;
   }
 }
