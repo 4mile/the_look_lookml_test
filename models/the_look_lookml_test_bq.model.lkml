@@ -85,7 +85,7 @@ explore: order_items {
     view_label: "Prior Year"
     relationship: many_to_one
     type: left_outer
-    sql_on: ${one_year.last_year} = ${order_items.created_month} ;;
+    sql_on: ${order_items.created_month} = ${one_year.last_year} ;;
   }
 
   join: two_years {
@@ -93,7 +93,7 @@ explore: order_items {
     view_label: "Two Years Ago"
     relationship: many_to_one
     type: left_outer
-    sql_on: ${two_years.two_years_ago} = ${order_items.created_month} ;;
+    sql_on: ${order_items.created_month} ${two_years.two_years_ago} ;;
   }
 
 }
