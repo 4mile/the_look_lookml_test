@@ -126,6 +126,16 @@ view: order_items {
     drill_fields: [detail*]
   }
 
+  measure: total_gross_margin {
+    type: sum
+    value_format_name: usd_0
+    sql: ${sale_price} - ${inventory_items.cost} ;;
+  }
+
+measure: total_revenue {
+  type: count_distinct
+  sql: ${order_id} ;;
+}
 ########## Return Information ##########
 
   dimension: is_returned {
@@ -136,8 +146,11 @@ view: order_items {
 
 ########## Repeat Purchase Facts ##########
 
-
-
+  measure: moving_average {
+    type: number
+    value_format_name: decimal_0
+    sql:(${order_items.total_revenue} + ifnull(${prior_month.total_revenue},0) + ifnull(${prior_two_months.total_revenue},0))/3  ;;
+  }
 
 ########## Sets ##########
 
